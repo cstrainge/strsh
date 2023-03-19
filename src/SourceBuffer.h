@@ -27,7 +27,7 @@ namespace strsh
             operator bool() const noexcept;
 
         public:
-            OptionalChar peek_next(size_t lookahead = 0) const noexcept;
+            OptionalChar peek_next() const noexcept;
             OptionalChar next() noexcept;
 
             Location current_location() const noexcept;

@@ -84,7 +84,7 @@ namespace strsh
     }
 
 
-    OptionalChar SourceBuffer::peek_next(size_t lookahead) const noexcept
+    OptionalChar SourceBuffer::peek_next() const noexcept
     {
         if (position >= source.size())
         {
