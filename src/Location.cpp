@@ -12,10 +12,12 @@ namespace strsh
     {
     }
 
+
     void Location::next() noexcept
     {
         ++column;
     }
+
 
     void Location::next_line() noexcept
     {

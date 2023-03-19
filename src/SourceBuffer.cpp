@@ -49,29 +49,6 @@ namespace strsh
     }
 
 
-    OptionalChar SourceBuffer::peek_next(size_t lookahead) const noexcept
-    {
-        if (position >= source.size())
-        {
-            return OptionalChar();
-        }
-
-        return source[position];
-    }
-
-
-    OptionalChar SourceBuffer::next() noexcept
-    {
-        auto next = peek_next();
-
-        if (next)
-        {
-            increment_position(next.value());
-        }
-
-        return next;
-    }
-
     SourceBuffer& SourceBuffer::operator =(SourceBuffer const& buffer)
     {
         if (&buffer != this)
@@ -101,18 +78,48 @@ namespace strsh
     }
 
 
+    SourceBuffer::operator bool() const noexcept
+    {
+        return peek_next().has_value();
+    }
+
+
+    OptionalChar SourceBuffer::peek_next(size_t lookahead) const noexcept
+    {
+        if (position >= source.size())
+        {
+            return OptionalChar();
+        }
+
+        return source[position];
+    }
+
+
+    OptionalChar SourceBuffer::next() noexcept
+    {
+        auto next = peek_next();
+
+        if (next)
+        {
+            increment_position(next.value());
+        }
+
+        return next;
+    }
+
+
     Location SourceBuffer::current_location() const noexcept
     {
         return source_location;
     }
 
 
-    std::string&& SourceBuffer::read_stream(std::istream& new_source) const
+    std::string SourceBuffer::read_stream(std::istream& new_source) const
     {
         auto begin = std::istreambuf_iterator<char>(new_source);
         auto end = std::istreambuf_iterator<char>();
 
-        return std::move(std::string(begin, end));
+        return std::string(begin, end);
     }
 
 

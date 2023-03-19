@@ -24,6 +24,8 @@ namespace strsh
             SourceBuffer& operator =(SourceBuffer const& buffer);
             SourceBuffer& operator =(SourceBuffer&& buffer);
 
+            operator bool() const noexcept;
+
         public:
             OptionalChar peek_next(size_t lookahead = 0) const noexcept;
             OptionalChar next() noexcept;
@@ -31,7 +33,7 @@ namespace strsh
             Location current_location() const noexcept;
 
         private:
-            std::string&& read_stream(std::istream& new_source) const;
+            std::string read_stream(std::istream& new_source) const;
             void increment_position(char next) noexcept;
     };
 
