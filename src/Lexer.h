@@ -9,7 +9,17 @@ namespace strsh
 
     enum class TokenType
     {
-        None
+        String,
+        Number,
+        Identifier,
+
+        Add,
+        Subtract,
+        Multiply,
+        Divide,
+
+        RedirectTo,
+        RedirectFrom
     };
 
 
@@ -21,12 +31,14 @@ namespace strsh
 
 
     using OptionalToken = std::optional<Token>;
+    using TokenList = std::vector<Token>;
 
 
     class Lexer
     {
         private:
-            SourceBuffer buffer;
+            TokenList tokens;
+            size_t current;
 
         public:
             Lexer(std::fs::path const& new_path, std::string const& new_source);
@@ -38,6 +50,9 @@ namespace strsh
         public:
             OptionalToken peek_next() const noexcept;
             OptionalToken next() noexcept;
+
+        private:
+            TokenList read_tokens(SourceBuffer&& source) const;
     };
 
 
