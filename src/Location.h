@@ -9,12 +9,13 @@ namespace strsh
     class Location
     {
         private:
-            size_t line = 1;
-            size_t column = 1;
+            size_t line;
+            size_t column;
 
             std::shared_ptr<std::fs::path> path;
 
         public:
+            Location();
             Location(std::fs::path const& new_path);
 
         public:
