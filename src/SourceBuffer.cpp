@@ -15,6 +15,14 @@ namespace strsh
     }
 
 
+    SourceBuffer::SourceBuffer(Location original_location, std::string const& new_source)
+    : source_location(original_location),
+      source(new_source),
+      position(0)
+    {
+    }
+
+
     SourceBuffer::SourceBuffer(std::fs::path const& new_path, std::string const& new_source)
     : source_location(new_path),
       source(new_source),

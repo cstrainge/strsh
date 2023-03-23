@@ -15,6 +15,7 @@ namespace strsh
 
         public:
             SourceBuffer() noexcept;
+            SourceBuffer(Location original_location, std::string const& new_source);
             SourceBuffer(std::fs::path const& new_path, std::string const& new_source);
             SourceBuffer(std::fs::path const& new_path, std::istream& new_source);
             SourceBuffer(SourceBuffer const& buffer);
